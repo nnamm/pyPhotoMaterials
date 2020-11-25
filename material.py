@@ -55,6 +55,9 @@ class PhotoMaterials(object):
         Set the photo material number from a file name.
         (ex. when file name is 'No10-S-01.jpg', materials number is '10'.)
 
+        Args:
+            re_target_list: A list of files used in the search.
+
         Returns:
             temp_num: Material number.
 
