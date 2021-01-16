@@ -1,6 +1,6 @@
 # pyPhotoMaterials
 
-I sell my photos on a Japanese media platform called "[note](https://note.com/tnnamm/m/m2aa9550047ed)". The Python script is made in v3.8.6 and is intended to simplify the process of making and publishing the photo materials.
+I sell my photos on a Japanese media platform called "[note](https://note.com/tnnamm/m/m2aa9550047ed)". The Python script is made in v3.8 and is intended to simplify the process of making and publishing the photo materials.
 
 It has the following features.
 
