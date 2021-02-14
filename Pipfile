@@ -9,9 +9,9 @@ requests = "*"
 [dev-packages]
 flake8 = "*"
 isort = "*"
-mypy = "*"
 pylint = "*"
 black = "==20.8b1"
+mypy = "*"
 
 [requires]
 python_version = "3.8"
