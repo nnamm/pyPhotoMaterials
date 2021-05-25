@@ -10,8 +10,8 @@ requests = "*"
 flake8 = "*"
 isort = "*"
 pylint = "*"
-black = "==21.4b1"
+black = "==21.5b1"
 mypy = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"
