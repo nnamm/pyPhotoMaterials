@@ -10,8 +10,6 @@ import re
 import sys
 import zipfile
 from pathlib import Path
-from typing import Dict
-from typing import List
 
 import settings
 
@@ -22,10 +20,10 @@ logger = logging.getLogger(__name__)
 class PhotoMaterials(object):
     """Photo Material class"""
 
-    def __init__(self, image_sizes: List[str]):
+    def __init__(self, image_sizes: list[str]):
         self.image_sizes = image_sizes
 
-    def get_file_lists(self) -> Dict[str, List[str]]:
+    def get_file_lists(self) -> dict[str, list[str]]:
         """Get file lists function.
 
         Set the dictionary data from working dir.
@@ -49,7 +47,7 @@ class PhotoMaterials(object):
         return temp_dict
 
     @staticmethod
-    def get_material_number(re_target_list: List[str]) -> str:
+    def get_material_number(re_target_list: list[str]) -> str:
         """Get material number function.
 
         Set the photo material number from a file name.
@@ -77,7 +75,7 @@ class PhotoMaterials(object):
         return temp_num
 
     def create_zip_file(
-        self, file_lists_dict: Dict[str, List[str]], material_num: str
+        self, file_lists_dict: dict[str, list[str]], material_num: str
     ) -> None:
         """Create zip files function.
 

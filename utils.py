@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 logger = logging.getLogger(__name__)
 
 
-def bool_from_str(text: str) -> bool:
+def bool_from_str(text: str):
     """Convert text to boolean function.
 
     Convert boolean text to Boolean type in settings.ini.

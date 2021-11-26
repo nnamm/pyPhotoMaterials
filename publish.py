@@ -7,11 +7,8 @@ given directory.
 
 import logging
 import sys
-from ftplib import FTP_TLS
-from ftplib import all_errors
+from ftplib import FTP_TLS, all_errors
 from pathlib import Path
-from typing import Dict
-from typing import List
 
 import settings
 import utils
@@ -25,8 +22,8 @@ class Publish(object):
 
     def __init__(
         self,
-        image_sizes: List[str],
-        file_lists_dict: Dict[str, List[str]],
+        image_sizes: list[str],
+        file_lists_dict: dict[str, list[str]],
         material_num: str,
     ):
         self.image_sizes = image_sizes
@@ -56,7 +53,10 @@ class Publish(object):
 
         with FTP_TLS(settings.ftps_host) as ftps:
             try:
-                ftps.login(settings.ftps_user, settings.ftps_passwd)
+                ftps.login(
+                    settings.ftps_user,
+                    settings.ftps_passwd,
+                )
                 ftps.prot_p()
                 ftps.set_pasv(True)
 
@@ -64,7 +64,10 @@ class Publish(object):
                 mat_num_dir_name = "no" + self.material_num
                 if mat_num_dir_name in ftps.nlst("."):
                     logger.info(
-                        {"action": "upload_file", "message": "Directory already exist"}
+                        {
+                            "action": "upload_file",
+                            "message": "Directory already exist",
+                        }
                     )
                     return False
                 ftps.mkd(mat_num_dir_name)
@@ -79,7 +82,10 @@ class Publish(object):
                 total = len(upload_list)
                 for idx, file_path in enumerate(upload_list, start=1):
                     with file_path.open(mode="rb") as f:
-                        ftps.storbinary("STOR " + file_path.name, f)
+                        ftps.storbinary(
+                            "STOR " + file_path.name,
+                            f,
+                        )
                         logger.info(
                             {
                                 "action": "upload_file",
@@ -88,10 +94,20 @@ class Publish(object):
                         )
 
             except all_errors as e:
-                logger.error({"action": "upload_file", "error": f"Upload failed: {e}"})
+                logger.error(
+                    {
+                        "action": "upload_file",
+                        "error": f"Upload failed: {e}",
+                    }
+                )
                 return False
             else:
-                logger.info({"action": "upload_file", "message": "Upload completed"})
+                logger.info(
+                    {
+                        "action": "upload_file",
+                        "message": "Upload completed",
+                    }
+                )
 
         return True
 
@@ -126,4 +142,9 @@ class Publish(object):
                 txt.write(host_zip_file_path + m_files[i] + "\n")
                 txt.write(host_zip_file_path + l_files[i] + "\n\n")
 
-        logger.info({"action": "create_url_text", "message": "Created url text"})
+        logger.info(
+            {
+                "action": "create_url_text",
+                "message": "Created url text",
+            }
+        )
