@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 logger = logging.getLogger(__name__)
 
 
-class PhotoMaterials(object):
+class PhotoMaterials:
     """Photo Material class"""
 
     def __init__(self, image_sizes: list[str]):

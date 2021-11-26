@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 logger = logging.getLogger(__name__)
 
 
-class Publish(object):
+class Publish:
     """Publish class"""
 
     def __init__(
@@ -46,9 +46,7 @@ class Publish(object):
 
         work_path = Path(settings.photo_work_dir)
         upload_list = [
-            file
-            for file in work_path.iterdir()
-            if file.suffix == ".jpg" or file.suffix == ".zip"
+            file for file in work_path.iterdir() if file.suffix in (".jpg", ".zip")
         ]
 
         with FTP_TLS(settings.ftps_host) as ftps:
@@ -81,10 +79,10 @@ class Publish(object):
 
                 total = len(upload_list)
                 for idx, file_path in enumerate(upload_list, start=1):
-                    with file_path.open(mode="rb") as f:
+                    with file_path.open(mode="rb") as file:
                         ftps.storbinary(
                             "STOR " + file_path.name,
-                            f,
+                            file,
                         )
                         logger.info(
                             {
@@ -93,11 +91,11 @@ class Publish(object):
                             }
                         )
 
-            except all_errors as e:
+            except all_errors as err:
                 logger.error(
                     {
                         "action": "upload_file",
-                        "error": f"Upload failed: {e}",
+                        "error": f"Upload failed: {err}",
                     }
                 )
                 return False
@@ -125,7 +123,7 @@ class Publish(object):
         )
         local_text_file_path = f"{settings.text_work_dir}url.txt"
 
-        with open(local_text_file_path, "w") as txt:
+        with open(local_text_file_path, "w", encoding="utf-8") as txt:
             for size in self.image_sizes:
                 zip_short_url = utils.get_short_url(
                     host_zip_file_path + f"No{self.material_num}-{size}.zip"

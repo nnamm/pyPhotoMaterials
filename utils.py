@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 logger = logging.getLogger(__name__)
 
 
-def bool_from_str(text: str):
+def bool_from_str(text: str) -> bool:
     """Convert text to boolean function.
 
     Convert boolean text to Boolean type in settings.ini.
@@ -20,13 +20,14 @@ def bool_from_str(text: str):
         text (str): Boolean text. (ex. True or False)
 
     Returns:
-        bool: True if "true", False "false".
+        bool: True if "true", False if "false".
 
     """
     if text.lower() == "true":
         return True
     if text.lower() == "false":
         return False
+    raise ValueError("text is invalid.")
 
 
 def get_short_url(long_url: str) -> str:
@@ -48,6 +49,6 @@ def get_short_url(long_url: str) -> str:
         short_url = requests.get(settings.bitly_api_url, params=params).json()["data"][
             "url"
         ]
-    except requests.exceptions.RequestException as e:
-        logger.error({"action": "get_short_url", "error": e})
+    except requests.exceptions.RequestException as err:
+        logger.error({"action": "get_short_url", "error": err})
     return short_url

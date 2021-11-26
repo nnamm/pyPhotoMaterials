@@ -28,7 +28,16 @@ line-length = 88
 [flake8]
 max-line-length = 88
 max-complexity = 20
-extend-ignore = "E203, W503, W504"
+extend-ignore = [
+    "W503", "W504",
+    "E203"
+]
+
+[tool.pylint.messages_control]
+max-line-length = 88
+disable = [
+    "C0330"
+]
 
 [tool.isort]
 profile = "black"
