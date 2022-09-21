@@ -9,41 +9,38 @@ license = "MIT"
 python = "^3.10"
 requests = "^2.26.0"
 
-[tool.poetry.dev-dependencies]
-black = "^21.11b1"
-flake8 = "^4.0.1"
+[tool.poetry.group.dev.dependencies]
+black = "^22.8.0"
+pyproject-flake8 = "5.0.4"
 isort = "^5.10.1"
-mypy = "^0.910"
-pylint = "^2.11.1"
-pynvim = "^0.4.3"
-pyproject-flake8 = "^0.0.1-alpha.2"
+mypy = "^0.971"
+pylint = "^2.15.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
+target-version = ['py310']
 line-length = 88
 
-[flake8]
+[tool.flake8]
 max-line-length = 88
 max-complexity = 20
 extend-ignore = [
     "W503", "W504",
-    "E203"
-]
-
-[tool.pylint.messages_control]
-max-line-length = 88
-disable = [
-    "C0330"
 ]
 
 [tool.isort]
 profile = "black"
-# multi_line_output = 3
-# include_trailing_comma = "True"
-# force_grid_wrap = 0
-# use_parentheses = "True"
-# ensure_newline_before_comments = "False"
-# line_length = 88
+multi_line_output = 7
+force_single_line = true
+line_length = 88
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+#[[tool.mypy.overrides]]
+
+[tool.pylint.messages_control]
+max-line-length = 88
