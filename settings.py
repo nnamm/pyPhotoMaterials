@@ -24,4 +24,5 @@ ftps_test_flag = bool_from_str(conf["ftps"]["test_env_flag"])
 ftps_home_url = conf["ftps"]["home"]
 
 bitly_api_url = conf["bitly"]["api"]
+bitly_domain = conf["bitly"]["domain"]
 bitly_access_token = conf["bitly"]["token"]
