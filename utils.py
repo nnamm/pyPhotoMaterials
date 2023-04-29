@@ -45,10 +45,17 @@ def get_short_url(long_url: str) -> str:
 
     short_url = ""
     try:
-        params = {"access_token": settings.bitly_access_token, "longurl": long_url}
-        short_url = requests.get(settings.bitly_api_url, params=params).json()["data"][
-            "url"
-        ]
+        headers = {
+            "Authorization": f"Bearer {settings.bitly_access_token}",
+            "Content-Type": "application/json",
+        }
+        data = f'{{"long_url": "{long_url}", "domain": "{settings.bitly_domain}"}}'
+
+        res = requests.post(settings.bitly_api_url, headers=headers, data=data)
+        if res.status_code != 200:
+            logger.warn({"action": "get_short_url", "warn": "bit.ly error, retry"})
+            return short_url
+        short_url = res.json()["link"]
     except requests.exceptions.RequestException as err:
         logger.error({"action": "get_short_url", "error": err})
     return short_url
