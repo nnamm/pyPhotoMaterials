@@ -1,27 +1,24 @@
-[tool.poetry]
+[project]
 name = "pyphotomaterials"
 version = "1.0.0"
 description = "My publish workflow script."
-authors = ["nnamm <t.nnamm@gmail.com>"]
-license = "MIT"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "requests>=2.32.3",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-requests = "^2.26.0"
-
-[tool.poetry.group.dev.dependencies]
-black = "^22.8.0"
-pyproject-flake8 = "5.0.4"
-isort = "^5.10.1"
-mypy = "^0.971"
-pylint = "^2.15.3"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "black>=24.10.0",
+    "isort>=5.13.2",
+    "mypy>=1.14.1",
+    "pylint>=3.3.3",
+    "pyproject-flake8>=7.0.0",
+]
 
 [tool.black]
-target-version = ['py310']
+target-version = ['py311']
 line-length = 88
 
 [tool.flake8]
